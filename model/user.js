@@ -21,6 +21,10 @@ const UserModel = db.define("users", {
   admin: {
     type: DataTypes.BOOLEAN,
     allowNull: false
+  },
+  houseCode: {
+    type: DataTypes.INTEGER,
+    allowNull: false
   }
 });
 

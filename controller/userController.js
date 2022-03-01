@@ -7,12 +7,28 @@ const { UniqueConstraintError } = require('sequelize/lib/errors');
 
 //! SIGNUP
 router.post('/signup', async (req, res) => {
-  const { email, password, admin } = req.body;
+  const { email, password, admin, houseCode } = req.body;
+
+  if (admin == true) {
+    let adminUser = await models.UserModel.findAll({
+      where: {houseCode: houseCode, admin: true, }
+    })
+    
+    if (adminUser.length > 0) {
+      res.json({
+        message: 'already admin on account'
+      })
+      return;
+    } 
+  } 
+
   try {
+  
     await models.UserModel.create({
       email: email,
       password: bcrypt.hashSync(password, 10),
-      admin: admin
+      admin: admin,
+      houseCode: houseCode
     })
     .then(
       user => {

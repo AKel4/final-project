@@ -19,6 +19,10 @@ const ChoreModel = db.define("chore", {
   time: {
     type: DataTypes.INTEGER,
     allowNull: false,
+  },
+  houseCode: {
+    type: DataTypes.INTEGER,
+    allowNull: true,
   }
 });
 

@@ -14,7 +14,7 @@ router.post('/create', validateJWT, async (req, res) => {
       time: time,
       roomId: roomId,
       userId: req.user.id,
-      //? houseCode: req.user.houseCode
+      houseCode: req.user.houseCode
     })
 
 
