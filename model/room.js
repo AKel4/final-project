@@ -1,7 +1,7 @@
 const { DataTypes } = require("sequelize");
 const db = require("../db");
 
-const Rooms = db.define("posts", {
+const RoomModel = db.define("room", {
   id: {
     type: DataTypes.UUID,
     primaryKey: true,
@@ -15,4 +15,4 @@ const Rooms = db.define("posts", {
 
 });
 
-module.exports = Rooms;
+module.exports = RoomModel;

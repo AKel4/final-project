@@ -1,7 +1,7 @@
 const { DataTypes } = require("sequelize");
 const db = require('../db');
 
-const Users = db.define("users", {
+const UserModel = db.define("users", {
   id: {
     type: DataTypes.UUID,
     primaryKey: true,
@@ -18,6 +18,10 @@ const Users = db.define("users", {
     type: DataTypes.STRING,
     allowNull: false,
   },
+  admin: {
+    type: DataTypes.BOOLEAN,
+    allowNull: false
+  }
 });
 
-module.exports = Users;
+module.exports = UserModel;

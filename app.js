@@ -1,23 +1,28 @@
 require('dotenv').config();
 
 const Express = require('express');
-const app = Express();
 const dbConnection = require('./db');
+const middleware = require('./middleware');
 
-app.use(require('./middleware/headers'))
+const app = Express();
+
+
+app.use(middleware.CORS);
 app.use(Express.json());
 
 const controllers = require('./controller')
 
-app.use('/user', controllers.userController);
-app.use('/room', controllers.roomController);
-app.use('/chore', controllers.choreController);
+app.use('/user', controllers.usercontroller);
+app.use(middleware.validateSession);
+app.use('/room', controllers.roomcontroller);
+app.use('/chore', controllers.chorecontroller);
 
 dbConnection.authenticate()
-.then(() => dbConnection.sync())
+.then( async () => await dbConnection.sync(/* {force: true} */))
 .then(() => {
-  app.listen(process.env.PORT, () => console.log(`[Server]: App is listening on %{process.env.PORT}`));
+  app.listen(process.env.PORT, () => console.log(`[Server]: App is listening on ${process.env.PORT}`));
 })
 .catch((err) => {
-  console.log(`[Server] has crashed: ${err}`);
+  console.log(`[Server]: has crashed`);
+  console.log(err);
 });

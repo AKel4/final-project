@@ -1,7 +1,7 @@
 const { DataTypes } = require("sequelize");
 const db = require("../db");
 
-const Chores = db.define("comments", {
+const ChoreModel = db.define("chore", {
   id: {
     type: DataTypes.UUID,
     primaryKey: true,
@@ -17,9 +17,9 @@ const Chores = db.define("comments", {
     allowNull: false,
   },
   time: {
-    type: DataTypes.NUMBER,
+    type: DataTypes.INTEGER,
     allowNull: false,
   }
 });
 
-module.exports = Chores;
+module.exports = ChoreModel;
