@@ -51,13 +51,23 @@ router.put('/:id', validateJWT, async (req, res) => {
   const { chore, desc, time, roomId } = req.body;
   const choreId = req.params.id
 
-  const query = {
+  let query 
+  if (req.user.admin == true) {
+    query = {
+      where: {
+          id: choreId,
+          houseCode: req.user.houseCode
+      }
+  };
+  } else {
+    query = {
       where: {
           id: choreId,
           userId: req.user.id
       }
   };
-
+  }
+    
   const updatedChore = {
       chore: chore,
       desc: desc,
