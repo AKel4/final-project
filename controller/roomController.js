@@ -1,5 +1,6 @@
 const router = require('express').Router();
 let validateJWT = require('../middleware/validate-session');
+let { models } = require('../model')
 const RoomModel = require('../model/room');
 
 //! CREATING A ROOM:
@@ -30,14 +31,20 @@ router.post("/create", validateJWT, async (req, res) => {
 //! GET ALL ROOMS BY ALL USERS
 router.get('/allrooms', validateJWT, async (req, res) => {
   try {
-      const allRooms = await RoomModel.findAll()
+      const allRooms = await RoomModel.findAll({
+        include: [
+                {
+                  model: models.ChoreModel
+                }
+          ]
+      })
 
       res.status(200).json(allRooms)
 
   } catch (err) {
 
       res.status(500).json({
-          error: err,
+          error: err.message,
           message: "The server broke but the app is still running"
       });
   }

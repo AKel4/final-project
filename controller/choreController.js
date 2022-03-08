@@ -46,6 +46,30 @@ router.get('/all', validateJWT, async (req, res) => {
   }
 })
 
+
+//! GET CHORE BY ROOM ID
+router.get('/:roomId', validateJWT, async (req, res) => {
+  const roomId = req.params.roomId
+
+
+  try {
+    const byRoom = await models.ChoreModel.findAll({
+      where: {
+        roomId: roomId
+      }
+    })
+
+    res.status(200).json(byRoom)
+  } catch (error) {
+    res.status(500).json({
+      error: `Failed to get chore by room id: ${error}`
+    })
+  }
+
+})
+
+
+
 //! UPDATE CHORE BY ID:
 router.put('/:id', validateJWT, async (req, res) => {
   const { chore, desc, time, roomId } = req.body;
