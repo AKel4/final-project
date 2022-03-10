@@ -10,8 +10,8 @@ const app = Express();
 app.use(middleware.CORS);
 app.use(Express.json());
 
-const controllers = require('./controller')
 let user = require("./controller/usercontroller")
+const controllers = require('./controller')
 //Comment
 app.use('/user', user);
 app.use(middleware.validateSession);
