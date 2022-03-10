@@ -1,21 +1,21 @@
 require('dotenv').config();
-const Express = require('express');
-const app = Express();
-const dbConnection = require('./db');
 
+const Express = require('express');
+const dbConnection = require('./db');
 const middleware = require('./middleware');
+
+const app = Express();
+
+
 app.use(middleware.CORS);
 app.use(Express.json());
 
-let user = require("./controller/usercontroller")
-let room = require("./controller/roomcontroller")
-let chore = require("./controller/chorecontroller")
-// const controllers = require('./controller')
-//Comment
-app.use("/user", user);
+const controllers = require('./controller')
+
+app.use('/user', controllers.usercontroller);
 app.use(middleware.validateSession);
-app.use("/room", room);
-app.use("/chore", chore);
+app.use('/room', controllers.roomcontroller);
+app.use('/chore', controllers.chorecontroller);
 
 dbConnection.authenticate()
 .then( async () => await dbConnection.sync())
