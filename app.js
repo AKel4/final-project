@@ -10,12 +10,15 @@ const app = Express();
 app.use(middleware.CORS);
 app.use(Express.json());
 
-const controllers = require('./controller')
+let user = require("./controller/usercontroller")
+let room = require("./controller/roomcontroller")
+let chore = require("./controller/chorecontroller")
+// const controllers = require('./controller')
 //Comment
-app.use('/user', controllers.usercontroller);
+app.use("/user", user);
 app.use(middleware.validateSession);
-app.use('/room', controllers.roomcontroller);
-app.use('/chore', controllers.chorecontroller);
+app.use("/room", room);
+app.use("/chore", chore);
 
 dbConnection.authenticate()
 .then( async () => await dbConnection.sync())
