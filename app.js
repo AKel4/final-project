@@ -12,9 +12,9 @@ app.use(Express.json());
 
 const controllers = require('./controller/index')
 
-app.use('/user', controllers.usercontroller);
+app.use('/user', controllers.userController);
 app.use(middleware.validateSession);
-app.use('/room', controllers.roomcontroller);
+app.use('/room', controllers.roomController);
 app.use('/chore', controllers.chorecontroller);
 
 dbConnection.authenticate()
