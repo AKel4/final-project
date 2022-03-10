@@ -1,3 +1,8 @@
-export const usercontroller = require("./usercontroller");
-export const roomcontroller = require("./roomcontroller");
-export const chorecontroller = require("./chorecontroller");
+module.exports = {
+  // usercontroller: require('./usercontroller'),
+  // chorecontroller: require('./chorecontroller'),
+  usercontroller: require("./usercontroller"),
+  // roomcontroller: require('./roomcontroller'),
+  roomcontroller: require("./roomcontroller"),
+  chorecotroller: require("./chorecontroller")
+};
