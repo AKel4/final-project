@@ -10,7 +10,8 @@ router.post("/create", validateJWT, async (req, res) => {
   try {
       const createRoom = await RoomModel.create({
          room: room,
-         userId: req.user.id
+         userId: req.user.id,
+         houseCode: req.user.houseCode
       });
 
 
@@ -30,12 +31,13 @@ router.post("/create", validateJWT, async (req, res) => {
 
 //! GET ALL ROOMS BY ALL USERS
 router.get('/allrooms', validateJWT, async (req, res) => {
+  const { houseCode } = req.user
 
   try {
       const allRooms = await RoomModel.findAll({
-        // where: {
-        //   houseCode: id
-        // },
+        where: {
+          houseCode: houseCode
+        },
         include: [
                 {
                   model: models.ChoreModel
