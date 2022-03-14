@@ -15,7 +15,7 @@ router.post('/signup', async (req, res) => {
     })
     
     if (adminUser.length > 0) {
-      res.json({
+      res.status(402).json({
         message: 'already admin on account'
       })
       return;
@@ -77,8 +77,8 @@ router.post('/login', async (req, res) => {
                 sessionToken: `${token}`
               })
             } else {
-              res.status(502).send({
-                error: 'bad gateway'
+              res.status(401).send({
+                message: 'Email or password does not match '
               })
             }
           })
