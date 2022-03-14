@@ -78,7 +78,7 @@ router.post('/login', async (req, res) => {
               })
             } else {
               res.status(401).send({
-                message: 'Email or password does not match '
+                message: 'Email or password does not match'
               })
             }
           })
@@ -91,7 +91,7 @@ router.post('/login', async (req, res) => {
     )
   } catch (err) {
     res.status(501).send({
-      error: `${err}`
+      message: `Failed to log in: ${err}` 
     })
   }
 })
