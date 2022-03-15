@@ -12,6 +12,10 @@ const RoomModel = db.define("room", {
     type: DataTypes.STRING,
     allowNull: false,
   },
+  houseCode: {
+    type: DataTypes.INTEGER,
+    allowNull: true,
+  }
 
 });
 

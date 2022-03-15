@@ -23,7 +23,7 @@ const UserModel = db.define("users", {
     allowNull: false
   },
   houseCode: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.INTEGER(5),
     allowNull: false
   }
 });
