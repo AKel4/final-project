@@ -84,8 +84,8 @@ router.post("/login", async (req, res) => {
       }
     });
   } catch (err) {
-    res.status(501).send({
-      message: `Failed to log in: ${err}`,
+    res.status(401).send({
+      message: "Email or password does not match.",
     });
   }
 });
