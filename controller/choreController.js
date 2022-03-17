@@ -1,6 +1,6 @@
 const router = require('express').Router();
 let validateJWT = require('../middleware/validate-session');
-const { ChoreModel, models } = require('../model')
+const { ChoreModel, RoomModel, models } = require('../model')
 
 //!CREATE A CHORE
 router.post('/create', validateJWT, async (req, res) => {

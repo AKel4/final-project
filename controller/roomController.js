@@ -32,27 +32,27 @@ router.post("/create", validateJWT, async (req, res) => {
 //! GET ALL ROOMS BY ALL USERS
 router.get('/allrooms', validateJWT, async (req, res) => {
   const { houseCode } = req.user
-
+  
   try {
-      const allRooms = await RoomModel.findAll({
-        where: {
-          houseCode: houseCode
-        },
-        include: [
-                {
-                  model: models.ChoreModel
-                }
-          ]
-      })
-
-      res.status(200).json(allRooms)
-
+    const allRooms = await RoomModel.findAll({
+      where: {
+        houseCode: houseCode
+      },
+      include: [
+        {
+          model: models.ChoreModel
+        }
+      ]
+    })
+    
+    res.status(200).json(allRooms)
+    
   } catch (err) {
-
-      res.status(500).json({
-          error: err.message,
-          message: "The server broke but the app is still running"
-      });
+    
+    res.status(500).json({
+      error: err.message,
+      message: "The server broke but the app is still running"
+    });
   }
 });
 
@@ -60,30 +60,47 @@ router.get('/allrooms', validateJWT, async (req, res) => {
 //! GET ALL ROOMS BY ONE USERS
 router.get('/myrooms', validateJWT, async (req, res) => {
   let { id } = req.user;
-
+  
   try {
-      const myRooms = await RoomModel.findAll({
-        where: {
-          userId: id
-        },
-        include: [
-          {
-            model: models.ChoreModel
-          }
-    ]
-      })
-
-      res.status(200).json(myRooms)
-
+    const myRooms = await RoomModel.findAll({
+      where: {
+        userId: id
+      },
+      include: [
+        {
+          model: models.ChoreModel
+        }
+      ]
+    })
+    
+    res.status(200).json(myRooms)
+    
   } catch (err) {
-
-      res.status(500).json({
-          error: err,
-          message: "The server broke but the app is still running"
-      });
+    
+    res.status(500).json({
+      error: err,
+      message: "The server broke but the app is still running"
+    });
   }
 });
 
+//! GET ROOM BY ID
+router.get('/target/:roomId', validateJWT, async (req, res) => {
+  const roomId = req.params.roomId;
+
+  try {
+    const results = await models.RoomModel.findAll({
+      where: {
+        id: roomId
+      }
+    })
+    res.status(200).json(results)
+  } catch (error) {
+    res.status(500).json({
+      message: `Failed: ${error}`
+    })
+  }
+})
 
 //! UPDATE ROOM BY ID:
 router.put('/:id', validateJWT, async (req, res) => {
