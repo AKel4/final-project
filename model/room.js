@@ -15,8 +15,7 @@ const RoomModel = db.define("room", {
   houseCode: {
     type: DataTypes.INTEGER,
     allowNull: true,
-  }
-
+  },
 });
 
 module.exports = RoomModel;

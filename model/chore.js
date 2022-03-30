@@ -23,7 +23,7 @@ const ChoreModel = db.define("chore", {
   houseCode: {
     type: DataTypes.INTEGER,
     allowNull: true,
-  }
+  },
 });
 
 module.exports = ChoreModel;

@@ -1,8 +1,8 @@
-const db = require('../db');
+const db = require("../db");
 
-const UserModel = require('./user');
-const RoomModel = require('./room');
-const ChoreModel = require('./chore');
+const UserModel = require("./user");
+const RoomModel = require("./room");
+const ChoreModel = require("./chore");
 
 //* associations below
 UserModel.hasMany(RoomModel);
@@ -12,12 +12,11 @@ RoomModel.hasMany(ChoreModel);
 RoomModel.belongsTo(UserModel);
 ChoreModel.belongsTo(RoomModel);
 
-
 module.exports = {
-  dbConnection: db, 
+  dbConnection: db,
   models: {
     UserModel,
-    RoomModel, 
-    ChoreModel
-  }
+    RoomModel,
+    ChoreModel,
+  },
 };
